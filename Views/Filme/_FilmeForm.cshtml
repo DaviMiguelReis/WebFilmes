@@ -1,0 +1,117 @@
+﻿@using WebFilmes.ViewModels
+@model FilmeFormViewModel
+
+<form asp-action="@ViewContext.RouteData.Values["action"]"
+      asp-route-id="@Model.Id"
+      method="post"
+      enctype="multipart/form-data"
+      class="movie-form">
+
+    @Html.AntiForgeryToken()
+
+    <div asp-validation-summary="ModelOnly"
+         class="text-danger validation-summary"></div>
+
+    @if (Model.Id > 0)
+    {
+        <input type="hidden" asp-for="Id" />
+    }
+
+    <div class="mb-3">
+        <label asp-for="Titulo" class="form-label"></label>
+
+        <input asp-for="Titulo"
+               class="form-control"
+               placeholder="Ex.: O Poderoso Chefão" />
+
+        <span asp-validation-for="Titulo"
+              class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Genero" class="form-label"></label>
+
+        <input asp-for="Genero"
+               class="form-control"
+               placeholder="Ex.: Drama, Ação, Terror" />
+
+        <span asp-validation-for="Genero"
+              class="text-danger"></span>
+    </div>
+
+    <div class="form-row">
+        <div class="mb-3">
+            <label asp-for="AnoLancamento"
+                   class="form-label"></label>
+
+            <input asp-for="AnoLancamento"
+                   class="form-control"
+                   type="number" />
+
+            <span asp-validation-for="AnoLancamento"
+                  class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Nota" class="form-label"></label>
+
+            <input asp-for="Nota"
+                   class="form-control"
+                   type="number"
+                   min="0"
+                   max="10"
+                   step="0.1" />
+
+            <span asp-validation-for="Nota"
+                  class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="mb-4">
+        <label asp-for="Sinopse" class="form-label"></label>
+
+        <textarea asp-for="Sinopse"
+                  class="form-control"
+                  rows="5"
+                  placeholder="Digite a sinopse do filme..."></textarea>
+
+        <span asp-validation-for="Sinopse"
+              class="text-danger"></span>
+    </div>
+
+    <div class="mb-4">
+        <label asp-for="Imagem" class="form-label"></label>
+
+        <input asp-for="Imagem"
+               type="file"
+               class="form-control"
+               accept=".png,.jpg,.jpeg,.webp,image/png,image/jpeg,image/webp" />
+
+        <div class="form-text">
+            PNG, JPG ou WEBP. Máximo de 5 MB. Opcional.
+        </div>
+
+        <span asp-validation-for="Imagem"
+              class="text-danger"></span>
+
+        @if (!string.IsNullOrWhiteSpace(Model.ImagemUrl))
+        {
+            <div class="current-image">
+                <p class="form-label mt-3">Imagem atual</p>
+
+                <img src="@Url.Content(Model.ImagemUrl)"
+                     alt="Imagem de @Model.Titulo" />
+            </div>
+        }
+    </div>
+
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">
+            Salvar filme
+        </button>
+
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            Cancelar
+        </a>
+    </div>
+</form>

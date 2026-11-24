@@ -1,0 +1,24 @@
+﻿@using WebFilmes.ViewModels
+@model FilmeFormViewModel
+
+@{
+    ViewData["Title"] = "Editar filme";
+}
+
+<div class="form-page">
+    <a asp-action="Index" class="back-link">
+        ← Voltar ao catálogo
+    </a>
+
+    <h1>Editar filme</h1>
+
+    <p class="form-description">
+        Atualize as informações de @Model.Titulo.
+    </p>
+
+    <partial name="_FilmeForm" model="Model" />
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

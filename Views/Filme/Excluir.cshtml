@@ -1,0 +1,50 @@
+﻿@using WebFilmes.ViewModels
+@model FilmeViewModel
+
+@{
+    ViewData["Title"] = "Excluir filme";
+}
+
+<div class="form-page">
+    <a asp-action="Index" class="back-link">
+        ← Voltar ao catálogo
+    </a>
+
+    <div class="delete-card">
+        <div class="delete-icon">!</div>
+
+        <p class="eyebrow">CONFIRMAÇÃO</p>
+
+        <h1>Excluir filme</h1>
+
+        <p class="delete-description">
+            Tem certeza de que deseja excluir
+            <strong>@Model.Titulo</strong>?
+        </p>
+
+        @if (!string.IsNullOrWhiteSpace(Model.ImagemUrl))
+        {
+            <div class="current-image">
+                <img src="@Url.Content(Model.ImagemUrl)"
+                     alt="Pôster de @Model.Titulo" />
+            </div>
+        }
+
+        <form asp-action="Excluir" method="post">
+            @Html.AntiForgeryToken()
+
+            <input type="hidden" name="id" value="@Model.Id" />
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-danger">
+                    Sim, excluir
+                </button>
+
+                <a asp-action="Index"
+                   class="btn btn-outline-secondary">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

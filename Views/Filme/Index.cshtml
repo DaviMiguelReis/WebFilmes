@@ -1,0 +1,72 @@
+﻿@using WebFilmes.ViewModels
+
+@model FilmeIndexViewModel
+
+@{
+    ViewData["Title"] = "Catálogo de filmes";
+}
+
+<section class="catalog-toolbar">
+    <h1 class="section-title mb-0">Filmes em Destaque</h1>
+    <div class="d-flex flex-wrap gap-2">
+        <form asp-action="Index" method="get" class="search-form">
+            <label class="visually-hidden" for="termoBusca">Buscar por título ou gênero</label>
+            <input id="termoBusca" name="termoBusca" value="@Model.TermoBusca"
+                   class="form-control" placeholder="Buscar por título ou gênero..." />
+            <button class="btn btn-outline-light" type="submit">Buscar</button>
+            @if (Model.TemBusca)
+            {
+                <a asp-action="Index" class="btn btn-link">Limpar</a>
+            }
+        </form>
+        <a asp-action="Criar" class="btn btn-danger">Adicionar filme</a>
+    </div>
+</section>
+
+@if (!Model.Filmes.Any())
+{
+    <div class="empty-state">
+        <h2>Nenhum filme encontrado</h2>
+        <p>
+            @(Model.TemBusca
+                ? "Tente buscar por outro título ou gênero."
+                : "Adicione o primeiro filme para começar seu catálogo.")
+        </p>
+        @if (!Model.TemBusca)
+        {
+            <a asp-action="Criar" class="btn btn-primary">Cadastrar primeiro filme</a>
+        }
+    </div>
+}
+else
+{
+    <div class="movie-container-flex">
+        @foreach (var filme in Model.Filmes)
+        {
+            <article class="movie-card">
+                @if (!string.IsNullOrWhiteSpace(filme.ImagemUrl))
+                {
+                    <img class="movie-poster" src="@Url.Content(filme.ImagemUrl)" alt="Pôster de @filme.Titulo" />
+                }
+                else
+                {
+                    <div class="movie-poster" aria-hidden="true">@filme.Titulo[..1].ToUpperInvariant()</div>
+                }
+                <div class="movie-info">
+                    <div>
+                        <h2 class="movie-title" title="@filme.Titulo">@filme.Titulo</h2>
+                        <div class="movie-meta">
+                            <span>@filme.Genero · @filme.AnoLancamento</span>
+                            <span class="movie-rating" title="Nota">@filme.Nota.ToString("0.0") ★</span>
+                        </div>
+                        <a asp-action="Detalhes" asp-route-id="@filme.Id" class="btn-details">Ver detalhes</a>
+                    </div>
+                    <div class="movie-card-actions">
+                        <a asp-action="Editar" asp-route-id="@filme.Id">Editar</a>
+                        <a asp-action="Excluir" asp-route-id="@filme.Id" class="delete-link">Excluir</a>
+                    </div>
+                </div>
+            </article>
+        }
+    </div>
+}

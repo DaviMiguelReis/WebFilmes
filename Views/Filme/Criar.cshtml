@@ -1,0 +1,23 @@
+﻿@using WebFilmes.ViewModels
+@model FilmeFormViewModel
+
+@{
+    ViewData["Title"] = "Adicionar filme";
+}
+
+<div class="form-page">
+    <a asp-action="Index" class="back-link">
+        ← Voltar ao catálogo
+    </a>
+
+    <h1>Adicionar filme</h1>
+    <p class="form-description">
+        Preencha as informações para cadastrar um novo filme.
+    </p>
+
+    <partial name="_FilmeForm" model="Model" />
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

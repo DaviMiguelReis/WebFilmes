@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CineFlix</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @* <link rel="stylesheet" href="~/ExemploNovo.styles.css" asp-append-version="true" /> *@
+
+    <style>
+        /* Estilos globais para manter o tema escuro do catálogo */
+        body {
+            background-color: #141414 !important;
+            color: #ffffff !important;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        /* Topo customizado (Barra de Navegação) */
+        .custom-navbar {
+            background-color: #000000;
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .custom-brand {
+            color: #E50914 !important; /* Vermelho estilo Netflix */
+            font-weight: bold;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+
+        .custom-nav-link {
+            color: #e5e5e5 !important;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .custom-nav-link:hover {
+            color: #E50914 !important;
+        }
+
+        /* Ajuste do container central */
+        .main-wrapper {
+            flex: 1;
+            padding-top: 2rem;
+            padding-bottom: 4rem;
+        }
+
+        /* Rodapé customizado */
+        .custom-footer {
+            background-color: #0a0a0a;
+            border-top: 1px solid #222222 !important;
+            color: #808080 !important;
+            padding: 1.5rem 0;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .custom-footer a {
+            color: #e5e5e5;
+            text-decoration: none;
+            margin-left: 10px;
+            transition: color 0.2s ease;
+        }
+
+        .custom-footer a:hover {
+            color: #E50914;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <!-- Navbar responsiva adaptada com as classes do Bootstrap, mas com visual escuro -->
+        <nav class="navbar navbar-expand-sm custom-navbar">
+            <div class="container-fluid">
+                <a class="navbar-brand custom-brand" asp-area="" asp-controller="Home" asp-action="Index">CineFlix</a>
+                <button class="navbar-toggler navbar-dark border-secondary" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link custom-nav-link" asp-area="" asp-controller="Filme" asp-action="Index">Início</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link custom-nav-link" asp-area="" asp-controller="Home" asp-action="Detalhes">Detalhes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link custom-nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacidade</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- O conteúdo do seu Index.cshtml da View 'Home' será renderizado aqui dentro -->
+    <div class="container main-wrapper">
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+
+    <!-- Novo rodapé integrado ao tema escuro -->
+    <footer class="custom-footer">
+        <div class="container">
+            <span>&copy; 2026 - CineFlix - Todos os direitos reservados.</span>
+            <a asp-area="" asp-controller="Home" asp-action="Privacy">Política de Privacidade</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

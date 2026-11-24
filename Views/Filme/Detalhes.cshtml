@@ -1,0 +1,45 @@
+﻿@using WebFilmes.ViewModels
+@model FilmeViewModel
+
+@{
+    ViewData["Title"] = Model.Titulo;
+}
+
+<div class="back-link-container">
+    <a asp-action="Index" class="back-link">&larr; Voltar ao catálogo</a>
+</div>
+
+<section class="movie-detail-container">
+    <div class="detail-poster-section">
+        @if (!string.IsNullOrWhiteSpace(Model.ImagemUrl))
+        {
+            <img class="detail-movie-poster" src="@Url.Content(Model.ImagemUrl)" alt="Pôster de @Model.Titulo" />
+        }
+        else
+        {
+            <div class="detail-movie-poster" aria-hidden="true">@Model.Titulo[..1].ToUpperInvariant()</div>
+        }
+    </div>
+
+    <div class="detail-info-section">
+        <div>
+            <h1 class="detail-movie-title">@Model.Titulo</h1>
+            <div class="detail-movie-meta">
+                <span class="detail-rating-badge">@Model.Nota.ToString("0.0") ★</span>
+                <span>@Model.AnoLancamento</span>
+                <span class="detail-genre-badge">@Model.Genero</span>
+            </div>
+        </div>
+
+        <div class="detail-movie-synopsis">
+            <h2>Sinopse</h2>
+            <p>@(string.IsNullOrWhiteSpace(Model.Sinopse) ? "Nenhuma sinopse cadastrada." : Model.Sinopse)</p>
+        </div>
+
+        <div class="detail-actions d-flex flex-wrap gap-2">
+            <a asp-action="Editar" asp-route-id="@Model.Id" class="btn btn-danger px-4">Editar filme</a>
+            <a asp-action="Excluir" asp-route-id="@Model.Id" class="btn btn-secondary px-3">Excluir filme</a>
+            <a asp-action="Index" class="btn btn-outline-light px-3">Voltar</a>
+        </div>
+    </div>
+</section>

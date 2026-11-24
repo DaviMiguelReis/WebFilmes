@@ -1,0 +1,60 @@
+﻿@{
+    ViewData["Title"] = "Detalhes do Filme";
+}
+
+<div class="back-link-container">
+    <a href="/" class="back-link">&larr; Voltar para o Catálogo</a>
+</div>
+
+<main class="movie-detail-container">
+    <div class="detail-poster-section">
+        <img class="detail-movie-poster" src="https://unsplash.com" alt="Pôster">
+    </div>
+
+    <div class="detail-info-section">
+        <div>
+            <h1 class="detail-movie-title">Interestelar</h1>
+            <div class="detail-movie-meta">
+                <span class="detail-rating-badge">8.7 ★</span>
+                <span>2014</span>
+                <span>169 min</span>
+                <span class="detail-genre-badge">Ficção Científica</span>
+            </div>
+        </div>
+
+        <div class="detail-movie-synopsis">
+            <h2>Sinopse</h2>
+            <p>As reservas naturais da Terra estão se esgotando e um grupo de astronautas recebe a missão de verificar possíveis planetas para receberem a população mundial.</p>
+        </div>
+
+        <div class="technical-info">
+            <div class="technical-item">
+                <span class="technical-label">Diretor:</span>
+                <span class="technical-value">Christopher Nolan</span>
+            </div>
+            <div class="technical-item">
+                <span class="technical-label">Elenco:</span>
+                <span class="technical-value">Matthew McConaughey, Anne Hathaway</span>
+            </div>
+        </div>
+
+        <!-- Seção de Botões de Ação unificada no layout -->
+        <div class="detail-actions d-flex flex-wrap gap-2">
+            <a href="#" class="btn btn-danger px-4 font-weight-bold">
+                Assistir Trailer
+            </a>
+
+            <a href="#" class="btn btn-secondary px-3">
+                Editar Filme
+            </a>
+
+            <button type="button" class="btn btn-outline-secondary text-light border-secondary px-3">
+                Excluir Filme
+            </button>
+
+            <a href="/" class="btn btn-outline-light px-3">
+                Voltar
+            </a>
+        </div>
+    </div>
+</main>
